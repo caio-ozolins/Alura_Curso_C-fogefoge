@@ -1,0 +1,4 @@
+#ifndef FOGEFOGE_MAIN_H
+#define FOGEFOGE_MAIN_H
+
+#endif //FOGEFOGE_MAIN_H
