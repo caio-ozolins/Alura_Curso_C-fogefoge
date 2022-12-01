@@ -13,4 +13,6 @@ struct Mapa{
     int linhas, colunas;
 };
 
+typedef struct Mapa MAPA;
+
 #endif //FOGEFOGE_MAIN_H

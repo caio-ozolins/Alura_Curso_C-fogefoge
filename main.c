@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Mapa m;
+MAPA m;
 
 int main(){
 
