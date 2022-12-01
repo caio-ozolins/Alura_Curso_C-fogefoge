@@ -8,4 +8,9 @@ void imprimemapa();
 int acabou();
 void move(char direcao);
 
+struct Mapa{
+    char** matriz;
+    int linhas, colunas;
+};
+
 #endif //FOGEFOGE_MAIN_H
