@@ -49,5 +49,7 @@ void move(char direcao){
             m.matriz[heroi.x][heroi.y+1] = '@';
             heroi.y++;
             break;
+        default:
+            m.matriz[heroi.x][heroi.y] = '@';
     }
 }
