@@ -5,10 +5,12 @@
 #define ESQUERDA 'a'
 #define BAIXO 's'
 #define DIREITA 'd'
+#define BOMBA 'b'
 
 int acabou();
 void move(char direcao);
 void fantasmas();
 int praondefantasmavai(int xatual, int yatual, int* xdestino, int* ydestino);
+void explodepilula();
 
 #endif //FOGEFOGE_MAIN_H
