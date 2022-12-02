@@ -49,16 +49,12 @@ void move(char direcao){
         default:
             return;
     }
-
-    if (proximox >= m.linhas)
+    if (!ehvalida(&m, proximox, proximoy))
         return;
-    if (proximoy >= m.colunas)
-        return;
-    if (m.matriz[proximox][proximoy] != '.')
+    if (!ehvazia(&m, proximox, proximoy))
         return;
 
-    m.matriz[proximox][proximoy] = '@';
-    m.matriz[heroi.x][heroi.y] = '.';
+    andanomapa(&m, heroi.x, heroi.y, proximox, proximoy);
     heroi.x = proximox;
     heroi.y = proximoy;
 }
