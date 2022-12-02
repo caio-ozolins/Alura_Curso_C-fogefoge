@@ -7,9 +7,14 @@ struct Mapa{
 };
 typedef struct Mapa MAPA;
 
+typedef struct{
+    int x,y;
+} POSICAO;
+
 void liberamapa(MAPA* m);
 void lemapa(MAPA* m);
 void alocamapa(MAPA* m);
 void imprimemapa(MAPA* m);
+void encontramapa(MAPA* m, POSICAO* p, char c);
 
 #endif //FOGEFOGE_MAPA_H
