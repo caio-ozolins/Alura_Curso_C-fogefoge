@@ -1,6 +1,9 @@
 #ifndef FOGEFOGE_MAPA_H
 #define FOGEFOGE_MAPA_H
 
+#define HEROI '@'
+#define VAZIO '.'
+
 struct Mapa{
     char** matriz;
     int linhas, colunas;
