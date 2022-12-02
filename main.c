@@ -1,5 +1,6 @@
 #include "main.h"
 #include "mapa.h"
+#include "ui.h"
 
 #include <stdio.h>
 #include <stdlib.h>

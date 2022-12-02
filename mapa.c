@@ -32,11 +32,6 @@ void alocamapa(MAPA* m){
         m->matriz[i] = malloc(sizeof(char) * m->colunas + 1);
     }
 }
-void imprimemapa(MAPA* m){
-    for (int i = 0; i < m->linhas; i++) {
-        printf("%s\n", m->matriz[i]);
-    }
-}
 int encontramapa(MAPA* m, POSICAO* p, char c){
     for (int i = 0; i < m->linhas; ++i) {
         for (int j = 0; j < m->colunas; ++j) {
