@@ -111,5 +111,12 @@ int praondefantasmavai(int xatual, int yatual, int* xdestino, int* ydestino){
 }
 
 void explodepilula(){
-    printf("boom");
+    for (int i = 1; i <= 3; ++i) {
+        if (ehvalida(&m, heroi.x, heroi.y+1)){
+            if (ehparede(&m, heroi.x, heroi.y+i)){
+                break;
+            }
+            m.matriz[heroi.x][heroi.y+i] = VAZIO;
+        }
+    }
 }
