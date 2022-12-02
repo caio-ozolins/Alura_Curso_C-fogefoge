@@ -21,7 +21,7 @@ int main(){
         char comando;
         scanf(" %c", &comando);
         move(comando);
-        if (comando == BOMBA) explodepilula(heroi.x, heroi.y, 3);
+        if (comando == BOMBA) explodepilula();
 
         fantasmas();
 
@@ -110,11 +110,22 @@ int praondefantasmavai(int xatual, int yatual, int* xdestino, int* ydestino){
     return 0;
 }
 
-void explodepilula(int x, int y, int qtd){
-    if (qtd == 0) return;
-    if (!ehvalida(&m, x, y+1)) return;
-    if (ehparede(&m, x, y+1)) return;
+void explodepilula(){
+    explodepilula2(heroi.x, heroi.y, 0, 1, 3);
+    explodepilula2(heroi.x, heroi.y, 0, -1, 3);
+    explodepilula2(heroi.x, heroi.y, 1, 0, 3);
+    explodepilula2(heroi.x, heroi.y, -1, 0, 3);
+}
 
-    m.matriz[x][y+1] = VAZIO;
-    explodepilula(x, y+1, qtd -1);
+void explodepilula2(int x, int y, int somax, int somay,int qtd){
+    if (qtd == 0) return;
+
+    int novox = x + somax;
+    int novoy = y + somay;
+
+    if (!ehvalida(&m, novox, novoy)) return;
+    if (ehparede(&m, novox, novoy)) return;
+
+    m.matriz[novox][novoy] = VAZIO;
+    explodepilula2(novox, novoy, somax, somay, qtd -1);
 }
