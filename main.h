@@ -8,5 +8,6 @@
 
 int acabou();
 void move(char direcao);
+void fantasmas();
 
 #endif //FOGEFOGE_MAIN_H
