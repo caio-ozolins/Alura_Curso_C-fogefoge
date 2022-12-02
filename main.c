@@ -30,8 +30,6 @@ int acabou(){
 }
 
 void move(char direcao){
-    int x, y;
-
     m.matriz[heroi.x][heroi.y] = '.';
 
     switch (direcao) {
