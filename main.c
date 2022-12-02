@@ -29,7 +29,8 @@ int main(){
 }
 
 int acabou(){
-    return 0;
+    POSICAO pos;
+    return !(encontramapa(&m, &pos, HEROI));
 }
 
 void move(char direcao){
