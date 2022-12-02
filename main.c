@@ -112,6 +112,9 @@ int praondefantasmavai(int xatual, int yatual, int* xdestino, int* ydestino){
 
 void explodepilula(int x, int y, int qtd){
     if (qtd == 0) return;
+    if (!ehvalida(&m, x, y+1)) return;
+    if (ehparede(&m, x, y+1)) return;
+
     m.matriz[x][y+1] = VAZIO;
     explodepilula(x, y+1, qtd -1);
 }
