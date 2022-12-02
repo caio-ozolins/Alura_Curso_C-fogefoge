@@ -75,6 +75,12 @@ void copiamapa(MAPA* destino, MAPA* origem){
         strcpy(destino->matriz[i], origem->matriz[i]);
     }
 }
-int podeandar(MAPA* m, int x, int y){
-    return ehvazia(m, x, y) && ehvalida(m, x, y);
+int podeandar(MAPA* m, char personagem, int x, int y){
+    return ehvalida(m, x, y) && !ehparede(m, x, y) && !ehpersonagem(m, personagem, x, y);
+}
+int ehparede(MAPA* m, int x, int y){
+    return m->matriz[x][y] == PAREDE_HORIZONTAL || m->matriz[x][y] == PAREDE_VERTICAL;
+}
+int ehpersonagem(MAPA* m, char personagem, int x, int y){
+    return m->matriz[x][y] == personagem;
 }
