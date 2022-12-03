@@ -1,33 +1,30 @@
 #ifndef FOGEFOGE_MAPA_H
 #define FOGEFOGE_MAPA_H
 
-#define HEROI '@'
-#define FANTASMA 'F'
-#define VAZIO '.'
-#define PAREDE_VERTICAL '|'
-#define PAREDE_HORIZONTAL '-'
-#define PILULA 'P'
-
-struct Mapa{
-    char** matriz;
-    int linhas, colunas;
-};
-typedef struct Mapa MAPA;
+#define HERO '@'
+#define GHOST 'F'
+#define EMPTY '.'
+#define VERTICAL_WALL '|'
+#define HORIZONTAL_WALL '-'
+#define PILL 'P'
 
 typedef struct{
+    char** matrix;
+    int lines, columns;
+} MAP;
+typedef struct{
     int x,y;
-} POSICAO;
+} POSITION;
 
-void liberamapa(MAPA* m);
-void lemapa(MAPA* m);
-void alocamapa(MAPA* m);
-int encontramapa(MAPA* m, POSICAO* p, char c);
-int ehvalida(MAPA* m, int x, int y);
-int ehvazia(MAPA* m, int x, int y);
-void andanomapa(MAPA* m, int xorigem, int yorigem, int xdestino, int ydestino);
-void copiamapa(MAPA* destino, MAPA* origem);
-int podeandar(MAPA* m, char personagem, int x, int y);
-int ehparede(MAPA* m, int x, int y);
-int ehpersonagem(MAPA* m, char personagem, int x, int y);
+void freeMap(MAP* map);
+void readMap(MAP* map);
+void allocateMap(MAP* map);
+int findInMap(MAP* map, POSITION* position, char c);
+int isValid(MAP* map, int x, int y);
+int isWall(MAP* map, int x, int y);
+int isCharacter(MAP* map, char character, int x, int y);
+void moveTo(MAP* map, int xOrigin, int yOrigin, int xDestiny, int yDestiny);
+void copyMap(MAP* destiny, MAP* origin);
+int canGoToTile(MAP* map, char character, int x, int y);
 
 #endif //FOGEFOGE_MAPA_H

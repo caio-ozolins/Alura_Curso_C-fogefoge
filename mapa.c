@@ -4,13 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-void liberamapa(MAPA* m){
-    for (int i = 0; i < m->linhas; ++i) {
-        free(m->matriz[i]);
+void freeMap(MAP* map){
+    for (int i = 0; i < map->lines; ++i) {
+        free(map->matrix[i]);
     }
-    free(m->matriz);
+    free(map->matrix);
 }
-void lemapa(MAPA* m){
+void readMap(MAP* map){
     FILE* f;
     f = fopen("..\\mapa.txt", "r");
     if(f == 0) {
@@ -18,64 +18,56 @@ void lemapa(MAPA* m){
         exit(1);
     }
 
-    fscanf(f, "%d %d", &(m->linhas), &(m->colunas));
-    alocamapa(m);
+    fscanf(f, "%d %d", &(map->lines), &(map->columns));
+    allocateMap(map);
 
-    for (int i = 0; i < m->linhas; i++) {
-        fscanf(f, "%s", m->matriz[i]);
+    for (int i = 0; i < map->lines; i++) {
+        fscanf(f, "%s", map->matrix[i]);
     }
     fclose(f);
 }
-void alocamapa(MAPA* m){
-    m->matriz = malloc(sizeof(char*) * m->linhas);
-    for (int i = 0; i < m->linhas; ++i) {
-        m->matriz[i] = malloc(sizeof(char) * m->colunas + 1);
+void allocateMap(MAP* map){
+    map->matrix = malloc(sizeof(char*) * map->lines);
+    for (int i = 0; i < map->lines; ++i) {
+        map->matrix[i] = malloc(sizeof(char) * map->columns + 1);
     }
 }
-int encontramapa(MAPA* m, POSICAO* p, char c){
-    for (int i = 0; i < m->linhas; ++i) {
-        for (int j = 0; j < m->colunas; ++j) {
-            if (m->matriz[i][j] == c){
-                p->x = i;
-                p->y = j;
+int findInMap(MAP* map, POSITION* position, char c){
+    for (int i = 0; i < map->lines; ++i) {
+        for (int j = 0; j < map->columns; ++j) {
+            if (map->matrix[i][j] == c){
+                position->x = i;
+                position->y = j;
                 return 1;
             }
         }
     }
     return 0;
 }
-int ehvalida(MAPA* m, int x, int y){
-    if (x >= m->linhas)
-        return 0;
-    if (y >= m->colunas)
-        return 0;
-
-    return 1;
+int isValid(MAP* map, int x, int y){
+    return !(x >= map->lines || y >= map->columns);
 }
-int ehvazia(MAPA* m, int x, int y){
-    return m->matriz[x][y] == VAZIO;
+int isWall(MAP* map, int x, int y){
+    return map->matrix[x][y] == HORIZONTAL_WALL || map->matrix[x][y] == VERTICAL_WALL;
 }
-void andanomapa(MAPA* m, int xorigem, int yorigem, int xdestino, int ydestino){
-    char personagem = m->matriz[xorigem][yorigem];
-    m->matriz[xdestino][ydestino] = personagem;
-    m->matriz[xorigem][yorigem] = VAZIO;
+int isCharacter(MAP* map, char character, int x, int y){
+    return map->matrix[x][y] == character;
 }
-void copiamapa(MAPA* destino, MAPA* origem){
-    destino->linhas = origem->linhas;
-    destino->colunas = origem->colunas;
+void moveTo(MAP* map, int xOrigin, int yOrigin, int xDestiny, int yDestiny){
+    char character = map->matrix[xOrigin][yOrigin];
+    map->matrix[xDestiny][yDestiny] = character;
+    map->matrix[xOrigin][yOrigin] = EMPTY;
+}
+void copyMap(MAP* destiny, MAP* origin){
+    destiny->lines = origin->lines;
+    destiny->columns = origin->columns;
 
-    alocamapa(destino);
+    allocateMap(destiny);
 
-    for (int i = 0; i < origem->linhas; ++i) {
-        strcpy(destino->matriz[i], origem->matriz[i]);
+    for (int i = 0; i < origin->lines; ++i) {
+        strcpy(destiny->matrix[i], origin->matrix[i]);
     }
 }
-int podeandar(MAPA* m, char personagem, int x, int y){
-    return ehvalida(m, x, y) && !ehparede(m, x, y) && !ehpersonagem(m, personagem, x, y);
-}
-int ehparede(MAPA* m, int x, int y){
-    return m->matriz[x][y] == PAREDE_HORIZONTAL || m->matriz[x][y] == PAREDE_VERTICAL;
-}
-int ehpersonagem(MAPA* m, char personagem, int x, int y){
-    return m->matriz[x][y] == personagem;
+int canGoToTile(MAP* map, char character, int x, int y){
+    return isValid(map, x, y) && !isWall(map, x, y) && !isCharacter(map, character, x, y);
 }
