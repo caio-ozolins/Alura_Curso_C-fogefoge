@@ -3,65 +3,64 @@
 
 #include <stdio.h>
 
-char desenhoparede[4][7] = {
+char tileWall[4][7] = {
         {"......" },
         {"......" },
         {"......" },
         {"......" }
 };
 
-char desenhofantasma[4][7] = {
+char tileGhost[4][7] = {
         {" .-.  " },
         {"| OO| " },
         {"|   | " },
         {"'^^^' " }
 };
 
-char desenhoheroi[4][7] = {
+char tileHero[4][7] = {
         {" .--. "  },
         {"/ _.-'"  },
         {"\\  '-." },
         {" '--' "  }
 };
 
-char desenhopilula[4][7] = {
+char tilePill[4][7] = {
         {"      "},
         {" .-.  "},
         {" '-'  "},
         {"      "}
 };
 
-char desenhovazio[4][7] = {
+char tileEmpty[4][7] = {
         {"      "},
         {"      "},
         {"      "},
         {"      "}
 };
 
-void imprimeparte(char desenho[4][7], int parte){
-    printf("%s", desenho[parte]);
+void printTile(char tile[4][7], int tileLine){
+    printf("%s", tile[tileLine]);
 }
-
-void imprimemapa(MAPA* m){
-    for (int i = 0; i < m->linhas; i++) {
-        for (int parte = 0; parte < 4; ++parte) {
-            for (int j = 0; j < m->colunas; ++j) {
-                switch (m->matriz[i][j]) {
-                    case FANTASMA:
-                        imprimeparte(desenhofantasma, parte);
+void printMap(MAP* map){
+    for (int i = 0; i < map->lines; i++) {
+        for (int tileLine = 0; tileLine < 4; ++tileLine) {
+            for (int j = 0; j < map->columns; ++j) {
+                switch (map->matrix[i][j]) {
+                    case GHOST:
+                        printTile(tileGhost, tileLine);
                         break;
-                    case HEROI:
-                        imprimeparte(desenhoheroi, parte);
+                    case HERO:
+                        printTile(tileHero, tileLine);
                         break;
-                    case PILULA:
-                        imprimeparte(desenhopilula, parte);
+                    case PILL:
+                        printTile(tilePill, tileLine);
                         break;
-                    case PAREDE_VERTICAL:
-                    case PAREDE_HORIZONTAL:
-                        imprimeparte(desenhoparede, parte);
+                    case VERTICAL_WALL:
+                    case HORIZONTAL_WALL:
+                        printTile(tileWall, tileLine);
                         break;
-                    case VAZIO:
-                        imprimeparte(desenhovazio, parte);
+                    case EMPTY:
+                        printTile(tileEmpty, tileLine);
                         break;
                 }
             }

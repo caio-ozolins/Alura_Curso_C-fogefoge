@@ -7,11 +7,11 @@
 #define DIREITA 'd'
 #define BOMBA 'b'
 
-int acabou();
-void move(char direcao);
+int gameover();
+void move(char direction);
 void fantasmas();
-int praondefantasmavai(int xatual, int yatual, int* xdestino, int* ydestino);
-void explodepilula();
-void explodepilula2(int x, int y, int somax, int somay,int qtd);
+int movementDirection(int xOrigin, int yOrigin, int* xDestiny, int* yDestiny);
+void usePill();
+void explode(int x, int y, int sumX, int sumY, int qty);
 
 #endif //FOGEFOGE_MAIN_H

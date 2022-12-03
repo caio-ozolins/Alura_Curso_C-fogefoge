@@ -3,7 +3,7 @@
 
 #include "mapa.h"
 
-void imprimeparte(char desenho[4][7], int parte);
-void imprimemapa(MAPA* m);
+void printTile(char tile[4][7], int tileLine);
+void printMap(MAP* map);
 
 #endif //FOGEFOGE_UI_H
